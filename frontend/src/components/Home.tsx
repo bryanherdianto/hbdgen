@@ -1,89 +1,122 @@
 import { Link } from "react-router-dom"
-import { FaBirthdayCake, FaMusic, FaImage, FaPalette } from "react-icons/fa"
+import { FaPalette, FaImage, FaMusic } from "react-icons/fa"
 
 const Home = () => {
+  const features = [
+    {
+      icon: <FaPalette className="text-blue-600 text-2xl" />,
+      title: "Curated Themes",
+      desc: "Choose from festive birthday designs or romantic Valentine's aesthetics to match the mood."
+    },
+    {
+      icon: <FaImage className="text-blue-600 text-2xl" />,
+      title: "Cherished Memories",
+      desc: "Upload a gallery of photos to showcase your favorite moments together on one beautiful page."
+    },
+    {
+      icon: <FaMusic className="text-blue-600 text-2xl" />,
+      title: "Set the Tone",
+      desc: "Add a celebratory track or a romantic melody to play the moment they open their link."
+    }
+  ]
+
+  const steps = [
+    {
+      num: 1,
+      title: "Pick an Occasion",
+      desc: "Select a template for a Birthday or Valentine's Day to start your digital greeting."
+    },
+    {
+      num: 2,
+      title: "Pour Your Heart Out",
+      desc: "Write your heartfelt message, upload photos, and customize the colors."
+    },
+    {
+      num: 3,
+      title: "Send the Surprise",
+      desc: "Copy the unique link and text it to your special someone to brighten their day."
+    }
+  ]
+
   return (
-    <div className="max-w-5xl mx-auto">
-      <section className="text-center mb-16">
-        <h2 className="text-4xl font-bold mb-6 text-gray-800">Create Beautiful Birthday Pages</h2>
-        <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-          Design personalized birthday pages for your friends and family with our easy-to-use generator. Share the link
-          and make their day special!
-        </p>
-        <Link
-          to="/manage"
-          className="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 px-8 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg"
-        >
-          Create a Birthday Page
-        </Link>
-      </section>
+    <div>
+      <section className="max-w-7xl mx-auto w-full">
+        <h1 className="text-[#0084FF] font-black text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] leading-[0.85] tracking-tight uppercase select-none">
+          Moments
+        </h1>
 
-      <section className="grid md:grid-cols-3 gap-8 mb-16">
-        <div className="bg-white p-6 rounded-xl shadow-md text-center">
-          <div className="bg-pink-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
-            <FaPalette className="text-pink-600 text-2xl" />
+        <div className="grid grid-cols-1 md:grid-cols-10 gap-8 mt-2">
+          <div className="pt-4 md:col-span-4">
+            <p className="text-stone-800 text-sm md:text-base max-w-xs leading-relaxed font-medium">
+              From birthdays to Valentine's, Wishly helps you turn celebrations into simple links you can share with anyone.</p>
           </div>
-          <h3 className="text-xl font-bold mb-2 text-gray-800">Choose a Theme</h3>
-          <p className="text-gray-600">
-            Select from multiple beautiful themes to match the birthday person's style and preferences.
-          </p>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-md text-center">
-          <div className="bg-purple-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
-            <FaImage className="text-purple-600 text-2xl" />
-          </div>
-          <h3 className="text-xl font-bold mb-2 text-gray-800">Add Photos</h3>
-          <p className="text-gray-600">
-            Upload photos of the birthday person to make the page more personal and memorable.
-          </p>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-md text-center">
-          <div className="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
-            <FaMusic className="text-blue-600 text-2xl" />
-          </div>
-          <h3 className="text-xl font-bold mb-2 text-gray-800">Include Music</h3>
-          <p className="text-gray-600">
-            Add birthday music to create a festive atmosphere when they open their special page.
-          </p>
-        </div>
-      </section>
-
-      <section className="bg-white p-8 rounded-xl shadow-md mb-16">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">How It Works</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
-              1
-            </div>
-            <h3 className="font-semibold mb-2">Create a Birthday Card</h3>
-            <p className="text-gray-600">Fill out the form with the birthday person's details and preferences.</p>
-          </div>
-          <div className="text-center">
-            <div className="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
-              2
-            </div>
-            <h3 className="font-semibold mb-2">Customize the Design</h3>
-            <p className="text-gray-600">Choose colors, add photos, and personalize the message.</p>
-          </div>
-          <div className="text-center">
-            <div className="bg-pink-500 text-white w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 font-bold">
-              3
-            </div>
-            <h3 className="font-semibold mb-2">Share the Link</h3>
-            <p className="text-gray-600">Send the unique URL to the birthday person and make them smile!</p>
+          <div className="md:col-span-6">
+            <h1 className="text-[#0084FF] font-black text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] leading-[0.85] tracking-tight uppercase select-none">
+              Matter
+            </h1>
           </div>
         </div>
       </section>
 
-      <section className="text-center">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Ready to Create a Birthday Surprise?</h2>
-        <Link
-          to="/manage"
-          className="inline-flex items-center bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 px-8 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg"
-        >
-          <FaBirthdayCake className="mr-2" /> Get Started Now
+      <div className="flex justify-center my-10">
+        <img src="/blue-circ.svg" alt="Decoration" className="animate-pulse" />
+      </div>
+
+      {/* Features */}
+      <section className="max-w-7xl mx-auto w-full mb-24">
+        <h2 className="text-3xl font-bold mb-8 tracking-tight text-center">Features</h2>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {features.map((feature, index) => (
+            <div key={index} className="bg-white p-8 rounded-2xl border border-stone-200 text-center hover:border-blue-400 transition-colors duration-300">
+              <div className="bg-blue-50 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-6">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+              <p className="text-stone-500 leading-relaxed text-sm">
+                {feature.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="max-w-7xl mx-auto w-full mb-24">
+        <div className="bg-white p-8 md:p-12 rounded-3xl border border-stone-200 hover:border-blue-400 transition-colors duration-300">
+          <h2 className="text-3xl font-bold mb-8 tracking-tight text-center">How It Works</h2>
+
+          <div className="grid md:grid-cols-3 gap-10">
+            {steps.map((step, index) => (
+              <div key={index} className="text-center relative">
+                <div className="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-5 font-bold text-lg shadow-sm">
+                  {step.num}
+                </div>
+                <h3 className="font-bold text-lg mb-2">{step.title}</h3>
+                <p className="text-stone-500 text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="relative max-w-7xl mx-auto w-full py-20 text-center mb-24 overflow-hidden rounded-3xl">
+        <img
+          src="/blue-rect.svg"
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover -z-10"
+        />
+        <h2 className="text-3xl font-bold mb-8 tracking-tight">Ready to Create a Surprise?</h2>
+        <Link to="/sign-in" className="inline-block">
+          <button className="button-container rounded-full font-bold">
+            <span className="circle1"></span>
+            <span className="circle2"></span>
+            <span className="circle3"></span>
+            <span className="circle4"></span>
+            <span className="circle5"></span>
+            <span className="text">Try Now</span>
+          </button>
         </Link>
       </section>
     </div>
