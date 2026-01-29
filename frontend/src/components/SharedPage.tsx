@@ -1,7 +1,5 @@
 function SharedPage() {
-  return (
-    <div>SharedPage</div>
-  )
+	return <div>SharedPage</div>;
 }
 
-export default SharedPage
+export default SharedPage;
