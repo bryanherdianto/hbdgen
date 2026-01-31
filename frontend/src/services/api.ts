@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_URL = import.meta.env.PROD
-	? "https://hbdgen.onrender.com"
+	? "https://wishly.onrender.com"
 	: "http://localhost:5000";
 
 const api = axios.create({

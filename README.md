@@ -1,36 +1,54 @@
-# 🎂 Happy Birthday Generator (hbdgen)
+# Wishly
 
-A full-stack web application to create and share personalized birthday pages for your friends and family. 🎉
+![GitHub Banner](https://i.imgur.com/0dxvo37.png)
 
-## ✨ Features
+A full-stack web application to create and share immersive, personalized surprise pages for life's special moments.
 
-- **Create Custom Birthday Pages**: Design personalized birthday pages with different themes, styles, and customization options. 🎨
-- **Multiple Themes**: Choose from pink, blue, purple, gold, or rainbow themes. 🌈
-- **Animation Styles**: Add balloons or confetti animations to make the birthday page more festive. 🎊
-- **Photo Upload**: Include a personal photo of the birthday person. 📸
-- **Background Music**: Option to add birthday music to enhance the celebration. 🎵
-- **Shareable Links**: Generate unique URLs to share with the birthday person and others. 🔗
-- **Management Dashboard**: Create, edit, and delete birthday pages from a simple dashboard. 📊
+<p align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" />
+</p>
 
-## 🛠️ Tech Stack
+## Features
+
+- **Surprise Categories**: Create meaningful pages for **Birthdays** and **Valentines**.
+- **Dynamic Templates**:
+  - **Card Stack**: A beautiful stacking card interaction for multi-message surprises.
+  - **Sticky Pixel**: A retro-style, scroll-triggered immersive experience.
+  - **Simple Valentine**: A playful "Will you be my Valentine?" interactive flow.
+- **Smart Slugs**: Clean, readable URLs (e.g., `/birthday/firstname-lastname-suffix`) instead of messy IDs.
+- **Music Playback**: Integrated background music options with preview functionality in the creator.
+- **Secure Authentication**: Built with **Clerk** for secure user management and dashboard access.
+- **Immersive Viewing**: Full-screen, ad-free experience for the recipient.
+
+## Tech Stack
 
 ### Frontend
-- React with TypeScript ⚛️
-- React Router for navigation 🧭
-- Tailwind CSS for styling 💅
-- Axios for API requests 📡
-- FontAwesome and React Icons for icons 🎭
+
+- **Vite + React + TypeScript**
+- **Motion (framer-motion)** for smooth animations
+- **Tailwind CSS** for modern styling
+- **Clerk SDK** for authentication
+- **Axios** for API integration
 
 ### Backend
-- Node.js and Express 🚀
-- MongoDB with Mongoose for data storage 🗄️
-- Multer for file uploads 📤
 
-## 📝 Usage
+- **Node.js & Express**
+- **MongoDB + Mongoose** for database management
+- **@clerk/express** for secure middleware
 
-1. Navigate to the home page 🏠
-2. Click "Create a Birthday Page" to go to the management page ✨
-3. Fill out the form with the birthday person's details 📋
-4. Customize the theme, style, and add optional elements 🎨
-5. Submit the form to create the birthday page ✅
-6. Share the generated link with friends and family 📲
+## Usage
+
+1. **Sign Up**: Create an account to start building your surprises.
+2. **Create**: Pick a category (Birthday or Valentine) and choose a template style.
+3. **Personalize**: Fill in the recipient's name and write your heart-felt messages.
+4. **Music**: Select a background track that fits the vibe (and preview it live).
+5. **Generate**: Create your page and get a unique link instantly.
+6. **Share**: Send the link to your special someone and wait for their reaction!
