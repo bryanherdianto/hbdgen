@@ -13,6 +13,7 @@
 	"description": "",
 	"dependencies": {
 		"@clerk/express": "^1.7.66",
+		"@google/generative-ai": "^0.24.1",
 		"cloudinary": "^2.9.0",
 		"cors": "^2.8.5",
 		"dotenv": "^16.5.0",

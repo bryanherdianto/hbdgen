@@ -7,6 +7,7 @@ const cors = require("cors");
 const { clerkMiddleware } = require("@clerk/express");
 const birthdayRoutes = require("./routes/birthday.routes");
 const valentineRoutes = require("./routes/valentine.routes");
+const aiRoutes = require("./routes/ai.routes");
 const app = express();
 
 const corsOptions = {
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(clerkMiddleware());
 app.use("/birthday", birthdayRoutes);
 app.use("/valentine", valentineRoutes);
+app.use("/ai", aiRoutes);
 
 mongoose
 	.connect(MONGO_URI)

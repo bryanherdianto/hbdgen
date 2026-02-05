@@ -94,3 +94,10 @@ export const valentineCardService = {
 	},
 };
 
+export const aiService = {
+	generate: async (prompt: string, type: "title" | "message"): Promise<string> => {
+		const response = await api.post("/ai/generate", { prompt, type });
+		return response.data.text;
+	},
+};
+

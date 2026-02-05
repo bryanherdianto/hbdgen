@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
 	birthdayCardService,
 	valentineCardService,
+	aiService,
 	setApiToken,
 } from "../services/api";
 
@@ -91,6 +92,11 @@ function Create() {
 		music: "none",
 		style: "card-stack", // Default style
 	});
+
+	const [aiLoading, setAiLoading] = useState<{
+		index: number;
+		field: "title" | "message";
+	} | null>(null);
 
 	const musicOptions = [
 		{
@@ -187,6 +193,33 @@ function Create() {
 				...formData,
 				cards: newCards,
 			});
+		}
+	};
+
+	const handleAIGenerate = async (
+		index: number,
+		field: "title" | "message",
+	) => {
+		const prompt = window.prompt(
+			`What theme or vibe should the AI use for this ${field}? (e.g. funny, emotional, inside joke about pizza...)`,
+		);
+		if (!prompt) return;
+
+		try {
+			setAiLoading({ index, field });
+			const token = await getToken();
+			setApiToken(token);
+
+			// Provide context from recipient name
+			const contextPrompt = `Recipient: ${formData.firstName} ${formData.lastName}. User context: ${prompt}`;
+			const generatedText = await aiService.generate(contextPrompt, field);
+
+			updateCard(index, field, generatedText);
+		} catch (error) {
+			console.error("AI Generation error:", error);
+			alert("AI generation failed. Make sure the API key is set.");
+		} finally {
+			setAiLoading(null);
 		}
 	};
 
@@ -374,21 +407,73 @@ function Create() {
 											</button>
 										)}
 									</div>
-									<input
-										type="text"
-										placeholder="Card Title (e.g. To my Bestie)"
-										className="w-full px-4 py-2 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-stone-600 placeholder:text-stone-400 bg-white"
-										value={card.title}
-										onChange={(e) => updateCard(index, "title", e.target.value)}
-									/>
-									<textarea
-										placeholder={`Enter message for card ${index + 1}`}
-										className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors text-stone-600 placeholder:text-stone-400 bg-white min-h-[100px] resize-y"
-										value={card.message}
-										onChange={(e) =>
-											updateCard(index, "message", e.target.value)
-										}
-									/>
+									<div className="relative group/field">
+										<input
+											type="text"
+											placeholder="Card Title (e.g. To my Bestie)"
+											className="w-full px-4 py-2 pr-10 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-stone-600 placeholder:text-stone-400 bg-white"
+											value={card.title}
+											onChange={(e) => updateCard(index, "title", e.target.value)}
+										/>
+										<button
+											onClick={() => handleAIGenerate(index, "title")}
+											disabled={aiLoading !== null}
+											className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-blue-500 transition-colors p-1"
+											title="Generate with AI"
+										>
+											{aiLoading?.index === index && aiLoading?.field === "title" ? (
+												<div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+											) : (
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="18"
+													height="18"
+													viewBox="0 0 24 24"
+													fill="none"
+													stroke="currentColor"
+													strokeWidth="2"
+													strokeLinecap="round"
+													strokeLinejoin="round"
+												>
+													<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+												</svg>
+											)}
+										</button>
+									</div>
+									<div className="relative group/field">
+										<textarea
+											placeholder={`Enter message for card ${index + 1}`}
+											className="w-full px-4 py-3 pr-10 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors text-stone-600 placeholder:text-stone-400 bg-white min-h-[100px] resize-y"
+											value={card.message}
+											onChange={(e) =>
+												updateCard(index, "message", e.target.value)
+											}
+										/>
+										<button
+											onClick={() => handleAIGenerate(index, "message")}
+											disabled={aiLoading !== null}
+											className="absolute right-3 top-4 text-stone-400 hover:text-blue-500 transition-colors p-1"
+											title="Generate with AI"
+										>
+											{aiLoading?.index === index && aiLoading?.field === "message" ? (
+												<div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+											) : (
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="18"
+													height="18"
+													viewBox="0 0 24 24"
+													fill="none"
+													stroke="currentColor"
+													strokeWidth="2"
+													strokeLinecap="round"
+													strokeLinejoin="round"
+												>
+													<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+												</svg>
+											)}
+										</button>
+									</div>
 								</div>
 							))}
 							<div className="flex justify-center">
