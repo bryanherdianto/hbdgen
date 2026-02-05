@@ -18,6 +18,7 @@ export interface BirthdayCard {
 	lastname: string;
 	style: string;
 	slug?: string;
+	previewImage?: string;
 	music: string;
 	cards: {
 		title: string;
@@ -32,6 +33,7 @@ export interface ValentineCard {
 	nickname: string;
 	style: string;
 	slug?: string;
+	previewImage?: string;
 	music: string;
 	cards: {
 		title: string;

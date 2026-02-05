@@ -21,6 +21,10 @@ const ValentineSchema = new mongoose.Schema({
 		unique: true,
 		index: true,
 	},
+	previewImage: {
+		type: String,
+		default: "",
+	},
 	music: {
 		type: String,
 		enum: [

@@ -13,33 +13,52 @@ function Pages() {
 	const [birthdays, setBirthdays] = useState<BirthdayCard[]>([]);
 	const [valentines, setValentines] = useState<ValentineCard[]>([]);
 	const [loading, setLoading] = useState(true);
-	const { getToken } = useAuth();
+	const { getToken, isLoaded, isSignedIn } = useAuth();
+
+	const fetchData = async () => {
+		if (!isLoaded || !isSignedIn) return;
+
+		try {
+			const token = await getToken();
+			if (!token) return;
+			setApiToken(token);
+
+			const [birthdayData, valentineData] = await Promise.all([
+				birthdayCardService.getAll(),
+				valentineCardService.getAll(),
+			]);
+
+			setBirthdays(Array.isArray(birthdayData) ? birthdayData : []);
+			setValentines(Array.isArray(valentineData) ? valentineData : []);
+		} catch (error) {
+			console.error("Error fetching pages:", error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const token = await getToken();
-				setApiToken(token);
-
-				const [birthdayData, valentineData] = await Promise.all([
-					birthdayCardService.getAll(),
-					valentineCardService.getAll(),
-				]);
-
-				setBirthdays(birthdayData);
-				setValentines(valentineData);
-			} catch (error) {
-				console.error("Error fetching pages:", error);
-			} finally {
-				setLoading(false);
-			}
-		};
-
 		fetchData();
-	}, [getToken]);
+	}, [getToken, isLoaded, isSignedIn]);
+
+	// Auto-refresh if any card is still "Generating" (previewImage is empty)
+	useEffect(() => {
+		const hasIncomplete = [...birthdays, ...valentines].some(
+			(card) => !card.previewImage,
+		);
+
+		if (hasIncomplete && !loading && birthdays.length + valentines.length > 0) {
+			const timer = setTimeout(() => fetchData(), 5000);
+			return () => clearTimeout(timer);
+		}
+	}, [birthdays, valentines, loading]);
+
+	if (!isLoaded) {
+		return <div className="min-h-screen bg-transparent" />;
+	}
 
 	return (
-		<div className="max-w-7xl mx-auto px-4 py-8">
+		<>
 			<SignedIn>
 				<section className="mb-12">
 					<div className="flex justify-between items-center mb-2">
@@ -63,8 +82,23 @@ function Pages() {
 								<Link
 									key={card._id}
 									to={`/birthday/${card.slug}`}
-									className="group bg-white border border-stone-200 rounded-2xl overflow-hidden hover:border-blue-400 transition-colors duration-300"
+									className="group bg-white border border-stone-200 rounded-3xl overflow-hidden hover:border-blue-400 transition-all duration-300 shadow-sm hover:shadow-xl"
 								>
+									<div className="aspect-video w-full overflow-hidden bg-stone-100 relative">
+										{card.previewImage ? (
+											<img
+												src={card.previewImage}
+												alt="Preview"
+												className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+											/>
+										) : (
+											<div className="w-full h-full flex items-center justify-center">
+												<span className="text-xs font-medium bg-white/80 backdrop-blur px-3 py-1 rounded-full text-stone-600 border border-stone-200 shadow-sm animate-pulse">
+													Generating Preview...
+												</span>
+											</div>
+										)}
+									</div>
 									<div className="p-6">
 										<div className="flex justify-between items-start mb-4">
 											<span className="text-2xl">🎂</span>
@@ -78,7 +112,7 @@ function Pages() {
 											For {card.firstname} {card.lastname}
 										</h3>
 										<p className="text-sm text-stone-500 line-clamp-2">
-											{card.cards[0]?.message}
+											{card.cards?.[0]?.message || "No message provided."}
 										</p>
 									</div>
 								</Link>
@@ -115,8 +149,23 @@ function Pages() {
 								<Link
 									key={card._id}
 									to={`/valentine/${card.slug}`}
-									className="group bg-white border border-stone-200 rounded-2xl overflow-hidden hover:border-blue-400 transition-colors duration-300"
+									className="group bg-white border border-stone-200 rounded-3xl overflow-hidden hover:border-blue-400 transition-all duration-300 shadow-sm hover:shadow-xl"
 								>
+									<div className="aspect-video w-full overflow-hidden bg-stone-100 relative">
+										{card.previewImage ? (
+											<img
+												src={card.previewImage}
+												alt="Preview"
+												className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+											/>
+										) : (
+											<div className="w-full h-full flex items-center justify-center">
+												<span className="text-xs font-medium bg-white/80 backdrop-blur px-3 py-1 rounded-full text-stone-600 border border-stone-200 shadow-sm animate-pulse">
+													Generating Preview...
+												</span>
+											</div>
+										)}
+									</div>
 									<div className="p-6">
 										<div className="flex justify-between items-start mb-4">
 											<span className="text-2xl">💖</span>
@@ -130,7 +179,7 @@ function Pages() {
 											For {card.nickname}
 										</h3>
 										<p className="text-sm text-stone-500 line-clamp-2">
-											{card.cards[0]?.message}
+											{card.cards?.[0]?.message || "No message provided."}
 										</p>
 									</div>
 								</Link>
@@ -153,7 +202,7 @@ function Pages() {
 					<h2 className="text-3xl font-bold mb-8 tracking-tight">
 						Sign in to manage your content
 					</h2>
-					<Link to="/sign-in" className="inline-block">
+					<Link to="/sign-up" className="inline-block">
 						<button className="button-container rounded-full font-bold">
 							<span className="circle1"></span>
 							<span className="circle2"></span>
@@ -165,7 +214,7 @@ function Pages() {
 					</Link>
 				</section>
 			</SignedOut>
-		</div>
+		</>
 	);
 }
 

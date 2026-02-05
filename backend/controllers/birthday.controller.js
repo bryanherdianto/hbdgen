@@ -1,8 +1,9 @@
 const Birthday = require("../models/birthday.model");
+const generateScreenshot = require("../utils/screenshot");
 
 exports.getBirthdays = async (req, res) => {
 	try {
-		const cards = await Birthday.find({ userId: req.auth().userId }).sort({
+		const cards = await Birthday.find({ userId: req.auth.userId }).sort({
 			createdAt: -1,
 		});
 		res.json(cards);
@@ -24,8 +25,26 @@ exports.getBirthdayBySlug = async (req, res) => {
 
 exports.createBirthday = async (req, res) => {
 	try {
-		const newCard = new Birthday({ ...req.body, userId: req.auth().userId });
+		const newCard = new Birthday({ ...req.body, userId: req.auth.userId });
 		const savedCard = await newCard.save();
+
+		// Run screenshot generation in background
+		console.log(`Starting background screenshot for card: ${savedCard.slug}`);
+		generateScreenshot(savedCard.slug, "birthday")
+			.then(async (url) => {
+				if (url) {
+					console.log(`Updating card ${savedCard.slug} with preview image: ${url}`);
+					await Birthday.findByIdAndUpdate(savedCard._id, {
+						previewImage: url,
+					});
+				} else {
+					console.warn(`No preview URL generated for ${savedCard.slug}`);
+				}
+			})
+			.catch((err) => {
+				console.error(`Background screenshot error for ${savedCard.slug}:`, err);
+			});
+
 		res.status(201).json(savedCard);
 	} catch (error) {
 		res.status(400).json({ message: error.message });

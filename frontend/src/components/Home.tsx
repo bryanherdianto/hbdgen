@@ -121,7 +121,7 @@ const Home = () => {
 				<h2 className="text-3xl font-bold mb-8 tracking-tight">
 					Ready to Create a Surprise?
 				</h2>
-				<Link to="/sign-in" className="inline-block">
+				<Link to="/sign-up" className="inline-block">
 					<button className="button-container rounded-full font-bold">
 						<span className="circle1"></span>
 						<span className="circle2"></span>
