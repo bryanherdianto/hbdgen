@@ -21,8 +21,8 @@ function SimpleValentine({ data }: { data: any }) {
 
 	if (isAccepted) {
 		return (
-			<div className="flex flex-col items-center justify-center min-h-screen bg-rose-50 font-pacifico gap-8 p-4 text-center">
-				<h1 className="text-4xl md:text-6xl text-rose-600 mb-5 text-balance">
+			<div className="flex flex-col items-center justify-center min-h-screen bg-rose-50 font-pacifico gap-4 p-4 text-center">
+				<h1 className="text-4xl md:text-6xl text-rose-600 leading-normal text-balance">
 					{data.card.title || "Yey, thank you! ❤️"}
 				</h1>
 				<div className="text-rose-500 font-lato font-semibold text-lg md:text-xl max-w-md">
@@ -39,8 +39,8 @@ function SimpleValentine({ data }: { data: any }) {
 
 	return (
 		<div className="flex flex-col items-center justify-center min-h-screen bg-rose-50 font-pacifico gap-8 p-4 text-center">
-			<h1 className="text-4xl md:text-6xl text-rose-600 text-balance">
-				Will you be my Valentine?
+			<h1 className="text-4xl md:text-6xl text-rose-600 text-balance leading-normal">
+				{data.nickname}, will you be my Valentine?
 			</h1>
 
 			<div className="w-48 h-48 md:w-64 md:h-64 flex items-center justify-center text-balance px-4 text-center py-4">

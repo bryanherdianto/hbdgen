@@ -19,11 +19,11 @@ const Card = ({ card, index }: CardProps) => {
 		<div className="h-screen w-full snap-start snap-always relative">
 			<div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
 				<motion.div
-					className={`relative w-full h-full flex flex-col items-center shadow-2xl justify-center ${color.bg}`}
+					className={`relative w-full h-full flex flex-col items-center shadow-2xl ${card.component ? "justify-start pt-[5vh] md:pt-[15vh] xl:pt-[20vh]" : "justify-center"} ${color.bg}`}
 				>
 					<div className="text-center px-10 max-w-4xl z-10">
 						<h2
-							className={`text-6xl md:text-8xl font-bold font-pixelify-sans mb-8 ${color.text}`}
+							className={`text-6xl ${card.component ? "sm:text-7xl" : "md:text-8xl"} font-bold font-pixelify-sans ${card.component ? "" : "mb-8"} ${color.text}`}
 						>
 							{card.title}
 						</h2>
@@ -33,7 +33,11 @@ const Card = ({ card, index }: CardProps) => {
 							{card.message}
 						</p>
 					</div>
-					{card.component}
+					{card.component && (
+						<div className="w-full flex justify-center items-center scale-75 md:scale-80 lg:scale-100">
+							{card.component}
+						</div>
+					)}
 				</motion.div>
 			</div>
 		</div>
@@ -47,15 +51,7 @@ export default function StickyPixel({ data }: { data: any }) {
 		...data.cards,
 		{
 			title: `Happy Birthday ${data.firstname}!`,
-			message: "Wishing you all the best.",
-			component: (
-				<div className="flex flex-col items-center mt-8">
-					<div className="cake" id="cake"></div>
-					<p className="text-4xl text-rose-100 font-pixelify-sans mt-4">
-						Tap the cake!
-					</p>
-				</div>
-			),
+			component: <div className="cake" id="cake"></div>,
 		},
 	];
 

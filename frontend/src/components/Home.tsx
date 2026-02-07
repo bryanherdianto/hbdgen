@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaPalette, FaImage, FaMusic } from "react-icons/fa";
+import { FaPalette, FaMagic, FaMusic } from "react-icons/fa";
 
 const Home = () => {
 	const features = [
@@ -9,9 +9,9 @@ const Home = () => {
 			desc: "Choose from festive birthday designs or romantic Valentine's aesthetics to match the mood.",
 		},
 		{
-			icon: <FaImage className="text-blue-600 text-2xl" />,
-			title: "Cherished Memories",
-			desc: "Upload a gallery of photos to showcase your favorite moments together on one beautiful page.",
+			icon: <FaMagic className="text-blue-600 text-2xl" />,
+			title: "AI-Powered Content",
+			desc: "Stuck for words? Use Gemini AI to generate heartwarming messages tailored for your loved one.",
 		},
 		{
 			icon: <FaMusic className="text-blue-600 text-2xl" />,
@@ -29,7 +29,7 @@ const Home = () => {
 		{
 			num: 2,
 			title: "Pour Your Heart Out",
-			desc: "Write your heartfelt message, upload photos, and customize the colors.",
+			desc: "Write your heartfelt message, use AI to craft the perfect words, and customize the styles.",
 		},
 		{
 			num: 3,
@@ -41,19 +41,19 @@ const Home = () => {
 	return (
 		<div>
 			<section className="max-w-7xl mx-auto w-full">
-				<h1 className="text-[#0084FF] font-black text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] leading-[0.85] tracking-tight uppercase select-none">
+				<h1 className="text-[#0084FF] font-black text-[clamp(3rem,15vw,6rem)] sm:text-7xl md:text-8xl lg:text-[9rem] leading-[0.85] tracking-tight uppercase select-none">
 					Moments
 				</h1>
 
-				<div className="grid grid-cols-1 md:grid-cols-10 gap-8 mt-2">
-					<div className="pt-4 md:col-span-4">
+				<div className="flex flex-col-reverse sm:grid grid-cols-6 md:grid-cols-10 gap-4 sm:gap-8">
+					<div className="pt-2 md:pt-4 col-span-3 md:col-span-4">
 						<p className="text-stone-800 text-sm md:text-base max-w-xs leading-relaxed font-medium">
 							From birthdays to Valentine's, Wishly helps you turn celebrations
 							into simple links you can share with anyone.
 						</p>
 					</div>
-					<div className="md:col-span-6">
-						<h1 className="text-[#0084FF] font-black text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] leading-[0.85] tracking-tight uppercase select-none">
+					<div className="pt-2 md:pt-4 col-span-3 md:col-span-6">
+						<h1 className="text-[#0084FF] font-black text-[clamp(3rem,15vw,6rem)] sm:text-7xl md:text-8xl lg:text-[9rem] leading-[0.85] tracking-tight uppercase select-none">
 							Matter
 						</h1>
 					</div>

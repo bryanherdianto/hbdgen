@@ -3,7 +3,7 @@ const generateScreenshot = require("../utils/screenshot");
 
 exports.getValentines = async (req, res) => {
 	try {
-		const cards = await Valentine.find({ userId: req.auth.userId }).sort({
+		const cards = await Valentine.find({ userId: req.auth().userId }).sort({
 			createdAt: -1,
 		});
 		res.json(cards);
@@ -16,16 +16,20 @@ exports.createValentine = async (req, res) => {
 	try {
 		const newCard = new Valentine({
 			...req.body,
-			userId: req.auth.userId,
+			userId: req.auth().userId,
 		});
 		const savedCard = await newCard.save();
 
 		// Run screenshot generation in background
-		console.log(`Starting background screenshot for valentine: ${savedCard.slug}`);
+		console.log(
+			`Starting background screenshot for valentine: ${savedCard.slug}`,
+		);
 		generateScreenshot(savedCard.slug, "valentine")
 			.then(async (url) => {
 				if (url) {
-					console.log(`Updating valentine ${savedCard.slug} with preview image: ${url}`);
+					console.log(
+						`Updating valentine ${savedCard.slug} with preview image: ${url}`,
+					);
 					await Valentine.findByIdAndUpdate(savedCard._id, {
 						previewImage: url,
 					});
@@ -34,7 +38,10 @@ exports.createValentine = async (req, res) => {
 				}
 			})
 			.catch((err) => {
-				console.error(`Background screenshot error for ${savedCard.slug}:`, err);
+				console.error(
+					`Background screenshot error for ${savedCard.slug}:`,
+					err,
+				);
 			});
 
 		res.status(201).json(savedCard);

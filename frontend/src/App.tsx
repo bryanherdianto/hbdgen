@@ -34,10 +34,10 @@ function App() {
 	};
 
 	const mockValentineData = {
-		nickname: "Valentine",
+		nickname: "Jane",
 		music: "none",
 		style: "simple-valentine",
-		card: { title: "To my Valentine", message: "You make every day special." },
+		card: { title: "To you, my Valentine", message: "You make every day feel very very special." },
 	};
 
 	return (
@@ -55,7 +55,7 @@ function App() {
 								<li>
 									<Link
 										to="/"
-										className="px-6 py-2 rounded-full border border-stone-900 text-stone-900 uppercase font-extrabold text-sm tracking-tight hover:bg-stone-900 hover:text-white transition-all duration-300"
+										className="px-3 sm:px-6 py-2 rounded-full border border-stone-900 text-stone-900 uppercase font-extrabold text-xs sm:text-sm tracking-tight hover:bg-stone-900 hover:text-white transition-all duration-300"
 									>
 										Home
 									</Link>
@@ -63,7 +63,7 @@ function App() {
 								<li>
 									<Link
 										to="/pages"
-										className="px-6 py-2 rounded-full border border-stone-900 text-stone-900 uppercase font-extrabold text-sm tracking-tight hover:bg-stone-900 hover:text-white transition-all duration-300"
+										className="px-3 sm:px-6 py-2 rounded-full border border-stone-900 text-stone-900 uppercase font-extrabold text-xs sm:text-sm tracking-tight hover:bg-stone-900 hover:text-white transition-all duration-300"
 									>
 										Pages
 									</Link>
@@ -71,7 +71,7 @@ function App() {
 								<li>
 									<Link
 										to="/create"
-										className="px-6 py-2 rounded-full border border-stone-900 text-stone-900 uppercase font-extrabold text-sm tracking-tight hover:bg-stone-900 hover:text-white transition-all duration-300"
+										className="px-3 sm:px-6 py-2 rounded-full border border-stone-900 text-stone-900 uppercase font-extrabold text-xs sm:text-sm tracking-tight hover:bg-stone-900 hover:text-white transition-all duration-300"
 									>
 										Create
 									</Link>
@@ -79,7 +79,7 @@ function App() {
 								<li>
 									<Link
 										to="/sign-up"
-										className="px-6 py-2 rounded-full border border-stone-900 text-stone-900 uppercase font-extrabold text-sm tracking-tight hover:bg-stone-900 hover:text-white transition-all duration-300"
+										className="px-3 sm:px-6 py-2 rounded-full border border-stone-900 text-stone-900 uppercase font-extrabold text-xs sm:text-sm tracking-tight hover:bg-stone-900 hover:text-white transition-all duration-300"
 									>
 										Start
 									</Link>

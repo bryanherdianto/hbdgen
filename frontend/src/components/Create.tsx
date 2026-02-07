@@ -346,17 +346,17 @@ function Create() {
 							className="absolute inset-0 w-full h-full object-cover -z-10"
 						/>
 						{selectedSection == 1 && (
-							<h1 className="text-4xl font-bold tracking-tight">
+							<h1 className="text-2xl sm:text-4xl font-bold tracking-tight">
 								Choose your favorite design
 							</h1>
 						)}
 						{selectedSection == 2 && (
-							<h1 className="text-4xl font-bold tracking-tight">
+							<h1 className="text-2xl sm:text-4xl font-bold tracking-tight">
 								Personalize your message
 							</h1>
 						)}
 						{selectedSection == 3 && (
-							<h1 className="text-4xl font-bold tracking-tight">
+							<h1 className="text-2xl sm:text-4xl font-bold tracking-tight">
 								The finishing touches
 							</h1>
 						)}
@@ -366,7 +366,7 @@ function Create() {
 							<h2 className="text-3xl font-semibold tracking-tight mb-2">
 								Birthday
 							</h2>
-							<div className="mb-12 grid grid-cols-2 gap-4">
+							<div className="mb-12 grid grid-cols-1 md:grid-cols-2 gap-4">
 								<button
 									onClick={() =>
 										setFormData({ ...formData, style: "card-stack" })
@@ -396,7 +396,7 @@ function Create() {
 							<h2 className="text-3xl font-semibold tracking-tight mb-2">
 								Valentine
 							</h2>
-							<div className="mb-12 grid grid-cols-2 gap-4">
+							<div className="mb-12 grid grid-cols-1 md:grid-cols-2 gap-4">
 								<button
 									onClick={() =>
 										setFormData({ ...formData, style: "simple-valentine" })

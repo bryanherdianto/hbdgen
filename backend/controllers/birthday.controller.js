@@ -3,7 +3,7 @@ const generateScreenshot = require("../utils/screenshot");
 
 exports.getBirthdays = async (req, res) => {
 	try {
-		const cards = await Birthday.find({ userId: req.auth.userId }).sort({
+		const cards = await Birthday.find({ userId: req.auth().userId }).sort({
 			createdAt: -1,
 		});
 		res.json(cards);
@@ -25,7 +25,7 @@ exports.getBirthdayBySlug = async (req, res) => {
 
 exports.createBirthday = async (req, res) => {
 	try {
-		const newCard = new Birthday({ ...req.body, userId: req.auth.userId });
+		const newCard = new Birthday({ ...req.body, userId: req.auth().userId });
 		const savedCard = await newCard.save();
 
 		// Run screenshot generation in background
@@ -33,7 +33,9 @@ exports.createBirthday = async (req, res) => {
 		generateScreenshot(savedCard.slug, "birthday")
 			.then(async (url) => {
 				if (url) {
-					console.log(`Updating card ${savedCard.slug} with preview image: ${url}`);
+					console.log(
+						`Updating card ${savedCard.slug} with preview image: ${url}`,
+					);
 					await Birthday.findByIdAndUpdate(savedCard._id, {
 						previewImage: url,
 					});
@@ -42,7 +44,10 @@ exports.createBirthday = async (req, res) => {
 				}
 			})
 			.catch((err) => {
-				console.error(`Background screenshot error for ${savedCard.slug}:`, err);
+				console.error(
+					`Background screenshot error for ${savedCard.slug}:`,
+					err,
+				);
 			});
 
 		res.status(201).json(savedCard);
