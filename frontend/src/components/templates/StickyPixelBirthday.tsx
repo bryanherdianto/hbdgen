@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { ReactNode } from "react";
 
 const colors = [
 	{ bg: "bg-blue-600", text: "text-blue-100" },
