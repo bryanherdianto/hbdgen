@@ -25,22 +25,22 @@ const Card = ({ card, index, targetScale }: any) => {
 	return (
 		<div
 			ref={container}
-			className="h-[100vh] flex items-center justify-center sticky"
-			style={{ top: `calc(5vh + ${topOffset}px)` }}
+			className="h-[600px] lg:h-[650px] xl:h-[850px] flex items-center justify-center sticky"
+			style={{ top: `${topOffset}px` }}
 		>
 			<motion.div
 				style={{
 					scale,
 					rotate: index % 2 === 0 ? -5 : 5,
 				}}
-				className={`relative w-[80vw] max-w-lg h-[500px] rounded-3xl p-10 origin-top border border-white/20 shadow-2xl ${
+				className={`relative w-[80vw] max-w-lg h-[420px] sm:h-[500px] rounded-3xl p-10 origin-top border border-white/20 shadow-2xl ${
 					colors[index % colors.length]
 				}`}
 			>
-				<h2 className="text-4xl font-bold text-white font-caveat">
+				<h2 className="text-3xl sm:text-4xl font-bold text-white font-caveat">
 					{card.title}
 				</h2>
-				<div className="text-5xl mt-4 text-white/80 font-caveat">
+				<div className="text-4xl sm:text-5xl mt-4 text-white/80 font-caveat">
 					{card.message}
 				</div>
 			</motion.div>
@@ -61,7 +61,7 @@ export default function CardStack({ data }: { data: any }) {
 					);
 				})}
 			</div>
-			<div className="text-7xl font-bold font-caveat text-center pb-40">
+			<div className="text-7xl font-bold font-caveat text-center pb-40 px-5">
 				Happy Birthday {data.firstname}!
 			</div>
 			<BirthdayCake />
