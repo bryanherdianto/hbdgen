@@ -11,12 +11,16 @@ import StickyPixel from "./templates/StickyPixelBirthday";
 import SimpleValentine from "./templates/SimpleValentine";
 import NotFound from "./NotFound";
 
-function SharedPage() {
+interface SharedPageProps {
+	setError: (value: boolean) => void; // Global error state to show header/footer conditionally
+}
+
+function SharedPage({ setError: setGlobalError }: SharedPageProps) {
 	const { slug } = useParams<{ slug: string }>();
 	const location = useLocation();
 	const [data, setData] = useState<BirthdayCard | ValentineCard | null>(null);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
+	const [hasError, setHasError] = useState(false); // Local error state to control NotFound rendering
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 
 	const isBirthday = location.pathname.startsWith("/birthday/");
@@ -24,8 +28,8 @@ function SharedPage() {
 	useEffect(() => {
 		const fetchData = async () => {
 			if (!slug) return;
+			setLoading(true);
 			try {
-				setLoading(true);
 				let result;
 				if (isBirthday) {
 					result = await birthdayCardService.getBySlug(slug);
@@ -33,6 +37,8 @@ function SharedPage() {
 					result = await valentineCardService.getBySlug(slug);
 				}
 				setData(result);
+				setHasError(false);
+				setGlobalError(false);
 
 				// Cleanup audio if exists
 				if (audioRef.current) {
@@ -60,7 +66,8 @@ function SharedPage() {
 				}
 			} catch (err) {
 				console.error("Error fetching shared page:", err);
-				setError(true);
+				setHasError(true);
+				setGlobalError(true);
 			} finally {
 				setLoading(false);
 			}
@@ -75,7 +82,7 @@ function SharedPage() {
 			window.removeEventListener("click", () => {});
 			window.removeEventListener("touchstart", () => {});
 		};
-	}, [slug, isBirthday]);
+	}, [slug, isBirthday, setGlobalError]);
 
 	if (loading) {
 		return (
@@ -85,7 +92,7 @@ function SharedPage() {
 		);
 	}
 
-	if (error || !data) {
+	if (hasError || !data) {
 		return <NotFound />;
 	}
 

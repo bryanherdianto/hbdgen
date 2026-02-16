@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /create
+Disallow: /pages
+
+Sitemap: https://wishly.bryanherdianto.site/sitemap.xml

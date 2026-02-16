@@ -8,13 +8,24 @@ import CardStack from "./components/templates/CardStackBirthday";
 import StickyPixel from "./components/templates/StickyPixelBirthday";
 import SimpleValentine from "./components/templates/SimpleValentine";
 import NotFound from "./components/NotFound";
+import { useState, useEffect } from "react";
 
 function App() {
 	const location = useLocation();
-	const isImmersive =
-		location.pathname.startsWith("/birthday/") ||
-		location.pathname.startsWith("/valentine/") ||
-		location.pathname.startsWith("/templates/");
+	const [isPageNotFound, setIsPageNotFound] = useState(false);
+
+	useEffect(() => {
+		setIsPageNotFound(false);
+	}, [location.pathname]);
+
+	const isSharedPath = /^\/(birthday|valentine)\/.+/.test(location.pathname);
+
+	const isTemplatePath =
+		location.pathname.startsWith("/templates/sticky-pixel") ||
+		location.pathname.startsWith("/templates/card-stack") ||
+		location.pathname.startsWith("/templates/simple-valentine");
+
+	const isImmersive = isTemplatePath || (isSharedPath && !isPageNotFound);
 
 	const mockBirthdayData = {
 		firstname: "John",
@@ -37,7 +48,10 @@ function App() {
 		nickname: "Jane",
 		music: "none",
 		style: "simple-valentine",
-		card: { title: "To you, my Valentine", message: "You make every day feel very very special." },
+		card: {
+			title: "To you, my Valentine",
+			message: "You make every day feel very very special.",
+		},
 	};
 
 	return (
@@ -101,8 +115,14 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route path="/create" element={<Create />} />
 					<Route path="/pages" element={<Pages />} />
-					<Route path="/birthday/:slug" element={<SharedPage />} />
-					<Route path="/valentine/:slug" element={<SharedPage />} />
+					<Route
+						path="/birthday/:slug"
+						element={<SharedPage setError={setIsPageNotFound} />}
+					/>
+					<Route
+						path="/valentine/:slug"
+						element={<SharedPage setError={setIsPageNotFound} />}
+					/>
 					<Route
 						path="/templates/card-stack"
 						element={<CardStack data={mockBirthdayData} />}
